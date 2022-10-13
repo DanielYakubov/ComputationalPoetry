@@ -6,5 +6,6 @@ There is a quiet famous poem called "Elevator" by Mark Strand. It's perhaps my f
 
 The poem repeats the stanza twice (each time numbered, 1 and 2). This repo remixes this poem and instead makes it repeat an infinite amount of times, the poem is printed at 14.69ms per char, per Demberg & Keller (2008)
 
+Note the part that says 'infinite' -- there's a while-true loop in this script, so be mindful if you choose to run it.
 
 Demberg, V., & Keller, F. (2008). Data from eye-tracking corpora as evidence for theories of syntactic processing complexity. Cognition, 109, 193-210.

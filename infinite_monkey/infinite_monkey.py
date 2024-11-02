@@ -5,7 +5,7 @@ import time
 class Monkey:
     FREEDOM = "free"
 
-    def __init__(self, root_word, n=50):
+    def __init__(self, root_word, n=30):
         self.root_word = root_word
         self.name = f"{root_word.capitalize()} Monkey"
         self.status = "bound"
@@ -13,6 +13,9 @@ class Monkey:
         self.chain_gang = []
         self.word_list = self.init_word_list(n=n)
         self.monkey_birth()
+
+        with open("last_monkey.txt") as f:
+            self.freedom_at_last = f.readlines()
 
     def monkey_birth(self):
         print(f"A {self.root_word} monkey is born. {self.root_word} is all it knows.")
@@ -22,7 +25,6 @@ class Monkey:
 
     def check_for_chain_gang(self):
         if all([monkey.status == self.FREEDOM for monkey in self.chain_gang]):
-            self.words_written.append("I am alone. I am the only one")
             return False
         else:
             return True
@@ -43,7 +45,10 @@ class Monkey:
                 if new_word == self.FREEDOM:
                     self.status = self.FREEDOM
             else:
-                self.status = self.FREEDOM
+                try:
+                    self.words_written.append(self.freedom_at_last.pop(0))
+                except:
+                    self.status = self.FREEDOM
         else:
             self.words_written.append("")
 

@@ -1,6 +1,5 @@
 import math
 import random
-import nltk
 from nltk.corpus import wordnet
 import time
 
@@ -8,7 +7,7 @@ import time
 class Monkey:
     FREEDOM = "free"
 
-    def __init__(self, root_word, n=30):
+    def __init__(self, root_word, n=50):
         self.root_word = root_word
         self.name = f"{root_word.capitalize()} Monkey"
         self.status = "bound"
@@ -55,9 +54,9 @@ class Monkey:
                 if new_word == self.FREEDOM:
                     self.status = self.FREEDOM
             else:
-                try:
+                if self.freedom_at_last:
                     self.words_written.append(self.freedom_at_last.pop(0))
-                except:
+                else:
                     self.status = self.FREEDOM
         else:
             self.words_written.append("")
@@ -66,7 +65,7 @@ class Monkey:
 class MonkeyPrison:
     def __init__(self, *monkies):
         self.monkies = monkies
-        self.table_spacing = 150 // len(monkies)
+        self.table_spacing = 175 // len(monkies)
 
     def link_all(self):
         for i, monkey in enumerate(self.monkies):

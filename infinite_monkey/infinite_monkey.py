@@ -1,4 +1,7 @@
+import math
 import random
+import nltk
+from nltk.corpus import wordnet
 import time
 
 
@@ -30,11 +33,18 @@ class Monkey:
             return True
 
     def init_word_list(self, n=100):
-        # get n - 1 similar words from root word
-        # TODO remove dummy code
-        word_list = [self.root_word] * (n-1)
-        word_list.append(self.FREEDOM)
-        # end dummy code
+        word_list = [self.root_word]
+        # this approach is a little naive, getting every synonym for every sense of a word
+        for syn in wordnet.synsets(self.root_word):
+            for l in syn.lemmas():
+                word_list.append(l.name().replace('_', ''))
+        if len(word_list) > n - 1:
+            word_list = word_list[:n - 1]
+        elif len(word_list) < n - 1:
+            multiple = math.ceil(n/len(word_list))
+            word_list = (word_list * multiple)[:n - 1]
+        word_list += [self.FREEDOM]
+        assert len(word_list) == n
         return word_list
 
     def write_word(self):

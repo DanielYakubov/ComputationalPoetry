@@ -1,0 +1,26 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background-color: #282c34;
+}
+
+.App-header {
+  text-align: center;
+  color: white;
+}
+
+.message-container {
+  width: 60%;  /* Adjust as necessary */
+  height: 60vh; /* Adjust to control the height of the message box */
+  overflow-y: auto; /* Enable vertical scrolling */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* Ensure text starts from the top */
+  align-items: center;
+  padding: 20px;
+  border: 1px solid white; /* Optional, for better visual distinction */
+  background-color: rgba(255, 255, 255, 0.1);  /* Semi-transparent background */
+  font-size: 18px; /* Adjust font size as necessary */
+}

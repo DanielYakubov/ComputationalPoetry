@@ -1,9 +1,6 @@
 import time
 import os, platform
 
-__name__ = "__TSUNAMI__"
-__author__ = "DOESITMATTER"
-
 DROPLET: str = "."
 WAVE: str = "/"
 INTERVAL: float = 50 / 1000

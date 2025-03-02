@@ -2,6 +2,9 @@ import math
 import random
 from nltk.corpus import wordnet
 import time
+import os
+
+from computational_poems.simple_encryption import caesar_shift
 
 
 class Monkey:
@@ -16,7 +19,8 @@ class Monkey:
         self.word_list = self.init_word_list(n=n)
         self.monkey_birth()
 
-        with open("last_monkey.txt") as f:
+        text_file = f"{os.path.dirname(os.path.abspath(__file__))}/last_monkey.txt"
+        with open(text_file) as f:
             self.freedom_at_last = f.readlines()
 
     def monkey_birth(self):
@@ -55,7 +59,9 @@ class Monkey:
                     self.status = self.FREEDOM
             else:
                 if self.freedom_at_last:
-                    self.words_written.append(self.freedom_at_last.pop(0))
+                    freedom_line_encrypted = self.freedom_at_last.pop(0)
+                    decrypted_freedom_line = caesar_shift(freedom_line_encrypted, shift=-3)
+                    self.words_written.append(decrypted_freedom_line)
                 else:
                     self.status = self.FREEDOM
         else:

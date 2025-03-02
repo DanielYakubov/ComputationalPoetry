@@ -1,6 +1,8 @@
 import time
 import os, platform
 
+from computational_poems.simple_encryption import caesar_shift
+
 DROPLET: str = "."
 WAVE: str = "/"
 INTERVAL: float = 50 / 1000
@@ -32,14 +34,16 @@ def stagger(index: int, total_lines: int) -> str:
     return "".join(turbulent_ocean)
 
 
-if __name__ == "__TSUNAMI__":
-    with open("tsunami.txt", "r") as file:
-        tsunami_poem = file.readlines()
+if __name__ == "__main__":
+    text_file = f"{os.path.dirname(os.path.abspath(__file__))}/tsunami.txt"
+    with open(text_file, "r") as file:
+        tsunami_poem_encrypted = file.readlines()
 
-    total_lines = len(tsunami_poem)
+    total_lines = len(tsunami_poem_encrypted)
     already_printed: list[str] = []
-    for i, line in enumerate(tsunami_poem):
+    for i, line in enumerate(tsunami_poem_encrypted):
         line = line.rstrip()
+        line = caesar_shift(line, shift=-3)
         # I want the printing to get faster each iteration
         new_interval = INTERVAL - (2 / 1000)
         if line:
